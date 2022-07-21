@@ -22,6 +22,16 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/index.html'))
 })
 
+app.post('/api/mainframe', (req, res) => {
+    try {
+        fundDemocrats(lotsOfMoney)
+    }
+    catch {
+        rollbar.err('Someone tried to pay the democrats')
+        res.status(400).send('Uh uh uh!')
+    }
+})
+
 app.get('/api/students', (req, res) => {
     rollbar.info('someone got the list of students to load')
     res.status(200).send(students)
