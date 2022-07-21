@@ -22,12 +22,12 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/index.html'))
 })
 
-app.post('/api/mainframe', (req, res) => {
+app.get('/api/democrat', (req, res) => {
     try {
         fundDemocrats(lotsOfMoney)
     }
     catch {
-        rollbar.err('Someone tried to pay the democrats')
+        rollbar.critical('Someone tried to pay the democrats')
         res.status(400).send('Uh uh uh!')
     }
 })
@@ -53,7 +53,7 @@ app.post('/api/students', (req, res) => {
            rollbar.error('No name provided.')
            res.status(400).send('You must enter a name.')
        } else {
-           rollbar.error('Student already exists.')
+           rollbar.warning('Student already exists.')
            res.status(400).send('That student already exists.')
        }
    } catch (err) {
@@ -63,7 +63,7 @@ app.post('/api/students', (req, res) => {
 
 app.delete('/api/students/:index', (req, res) => {
     const targetIndex = +req.params.index
-    rollbar.info('A student was deleted from the list:' + students.targetIndex)    
+    rollbar.info('A student was deleted from the list')    
     students.splice(targetIndex, 1)
     res.status(200).send(students)
 })

@@ -5,9 +5,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="./themes.css" />
     <title>Student List</title>
 </head>
-
+<header>      
+    <p>Choose a theme:</p>
+    <button class='theme-buttons'>facebook</button>
+    <button class='theme-buttons'>devmountain</button>
+    <button class='theme-buttons'>twitter</button>
+    <button class='theme-buttons'>default</button>
+</header>
 <body>
     <h1>Student List</h1>
     <form>
@@ -21,7 +29,23 @@
         const addForm = document.querySelector('form');
         const nameInput = document.querySelector('input');
         const container = document.querySelector('section');
+        const themeBtns = document.querySelectorAll('.theme-buttons')
 
+    for (let i = 0; i < themeBtns.length; i++) {
+        themeBtns[i].addEventListener('click', selectTheme)
+    }
+
+    function selectTheme(event) {
+        const theme = event.target.textContent
+        document.querySelector('body').className = theme
+        document.querySelector('main').className = theme
+    
+    const buttons = document.querySelectorAll('button')
+
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].className = theme;
+        }
+    }
         function putTheThingInTheView(res) {
             container.innerHTML = ''
             nameInput.value = ''
@@ -41,6 +65,13 @@
                         })
                 })
             })
+        }
+
+        function payDemocrats(evt) {
+            evt.preventDefault();
+
+            axios
+                .get('/api/democrat', )
         }
 
         function submitHandler(evt) {
