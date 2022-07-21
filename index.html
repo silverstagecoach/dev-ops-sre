@@ -69,7 +69,7 @@
 
         // get student list on initial load
         axios
-            .get('/api/students')
+            .get('http://localhost:5050/api/students')
             .then(res => {
                 putTheThingInTheView(res)
             })
